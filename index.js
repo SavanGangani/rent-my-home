@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./api/routes/userRoute');
+const postRoutes = require('./api/routes/postRoute');
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/RentmyHome', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', userRoutes);
+app.use('/', postRoutes);
 
 app.use('/', (req, res) => {
     res.status(404).send('URL not found');
