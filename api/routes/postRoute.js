@@ -7,7 +7,10 @@ router.post('/add', (req, res) => {
         name: req.body.name,
         contact: req.body.contact,
         address: req.body.address,
-        type: req.body.type,
+        city: req.body.city,
+        area: req.body.area,
+        pincode: req.body.pincode,
+        housetype: req.body.housetype,
         bedroom: req.body.bedroom,
         bathroom: req.body.bathroom,
         parking: req.body.parking,
@@ -20,7 +23,7 @@ router.post('/add', (req, res) => {
         .then(result => {
             res.status(200).json({
                 message: 'Post created successfully',
-                result: result
+                // result: result
             });
         })
         .catch(err => {
@@ -30,7 +33,7 @@ router.post('/add', (req, res) => {
         });
 });
 
-router.get('/all', (req, res) => {
+router.get('/allpost', (req, res) => {
     Post.find()
         .then(posts => {
             res.status(200).json({
@@ -43,5 +46,20 @@ router.get('/all', (req, res) => {
             });
         });
 });
+
+router.get('/post/:housetype', (req, res) => {
+    Post.find({ housetype: req.params.housetype })
+        .then(post => {
+            res.status(200).json({
+                post: post
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
 
 module.exports = router;

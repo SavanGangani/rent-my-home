@@ -11,11 +11,25 @@ const postSchema = new mongoose.Schema({
         maxlength: 10,
         required: true
     },
+    city: {
+        type: String,
+        required: true
+    },
+    area: {
+        type: String,
+        required: true
+    },
+    pincode: {
+        type: Number,
+        minlength: 6,
+        maxlength: 6,
+        required: true
+    },
     address: {
         type: String,
         required: true
     },
-    type: {
+    housetype: {
         type: String,
         required: true
     },
