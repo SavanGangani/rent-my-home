@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -6,8 +7,9 @@ const userRoutes = require('./api/routes/userRoute');
 const postRoutes = require('./api/routes/postRoute');
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb+srv://RentMyHome:RentMyHome@cluster0.k048sbq.mongodb.net/RentMyHome?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to database');
     })
@@ -26,6 +28,6 @@ app.use('/', (req, res) => {
     res.status(404).send('Welcome to RentMyHome');
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log('Server started on port 3000');
 });
