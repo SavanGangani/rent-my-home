@@ -23,7 +23,7 @@ app.use('/', userRoutes);
 app.use('/', postRoutes);
 
 app.use('/', (req, res) => {
-    res.status(404).send('URL not found');
+    res.status(404).send('Welcome to RentMyHome');
 });
 
 app.listen(3000, () => {
