@@ -49,7 +49,8 @@ router.post('/login', (req, res) => {
                     }
                     if (result) {
                         res.status(200).json({
-                            message: 'Login successfull'
+                            message: 'Login successfull',
+                            id: user[0]._id
                         });
                     }
                 });
