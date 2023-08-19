@@ -9,12 +9,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         lowercase: true,
         unique: true,
-        required: true
+        required: function () {
+            return !this.phone;
+        }
     },
     phone: {
         type: String,
         unique: true,
-        required: true
+        required: function () {
+            return !this.email;
+        }
     },
     password: {
         type: String,
