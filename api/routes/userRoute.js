@@ -4,39 +4,32 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
 router.post('/signup', (req, res) => {
-    bcrypt.hash(req.body.password, 10, (err, hash) => {
+    bcrypt.hash(req.body.password, 10, async (err, hash) => {
         if (err) {
             res.status(500).json({
                 error: err
             });
         }
         else {
-            const user = new User({
-                name: req.body.name,
-                email: req.body.email,
-                phone: req.body.phone,
-                password: hash
-            });
-            user.save()
-                .then(result => {
-                    res.status(200).json({
-                        message: 'User created successfully',
-                        result: result
-                    });
-                })
-                .catch(err => {
-                    res.status(500).json({
-                        error: err
-                    });
+            try {
+                const newUser = new User({
+                    name: req.body.name,
+                    contact: req.body.contact,
+                    password: hash
                 });
+
+                const savedUser = await newUser.save();
+                res.status(201).json(savedUser);
+            } catch (error) {
+                res.status(400).json({ error: error.message });
+            }
         }
     });
 });
 
 router.post('/login', (req, res) => {
 
-    const { email, phone } = req.body;
-    User.find({ $or: [{ email: email }, { phone: phone }] })
+    User.find({ contact: req.body.contact })
         .then(user => {
             if (user.length < 1) {
                 res.status(401).json({

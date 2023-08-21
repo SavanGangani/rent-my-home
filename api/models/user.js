@@ -5,20 +5,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    contact: {
         type: String,
-        lowercase: true,
+        required: true,
         unique: true,
-        required: function () {
-            return !this.phone;
-        }
-    },
-    phone: {
-        type: String,
-        unique: true,
-        required: function () {
-            return !this.email;
-        }
+        validate: {
+            validator: function (value) {
+                // Check if the input is a valid email or phone number
+                return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value) ||
+                    /^[0-9]{10}$/.test(value);
+            },
+            message: 'Please enter a valid email address or phone number.'
+        },
     },
     password: {
         type: String,
@@ -26,4 +24,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

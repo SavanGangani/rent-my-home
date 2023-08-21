@@ -25,7 +25,7 @@ app.use('/', userRoutes);
 app.use('/', postRoutes);
 
 app.use('/', (req, res) => {
-    res.status(404).send('Welcome to RentMyHome');
+    res.status(404).send('Welcome to Rent-My-Home');
 });
 
 app.listen(PORT, () => {
