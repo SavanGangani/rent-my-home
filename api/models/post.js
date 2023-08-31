@@ -11,6 +11,10 @@ const postSchema = new mongoose.Schema({
         maxlength: 10,
         required: true
     },
+    time: {
+        type: String,
+        required: true
+    },
     city: {
         type: String,
         required: true

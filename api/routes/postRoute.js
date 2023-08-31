@@ -6,6 +6,7 @@ router.post('/add', (req, res) => {
     const post = new Post({
         name: req.body.name,
         contact: req.body.contact,
+        time: req.body.time,
         address: req.body.address,
         city: req.body.city,
         area: req.body.area,
