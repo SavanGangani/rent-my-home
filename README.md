@@ -1,3 +1,3 @@
 # rent-my-home
 
-<!-- API -->
+Intrigrated Partially
