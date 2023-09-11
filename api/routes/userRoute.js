@@ -24,6 +24,7 @@ router.post('/signup', (req, res) => {
                     message: 'User created successfully',
                     data: savedUser
                 });
+                console.log(savedUser);
             } catch (error) {
                 res.status(400).json({ error: error.message });
             }
@@ -50,7 +51,8 @@ router.post('/login', (req, res) => {
                     if (result) {
                         res.status(200).json({
                             message: 'Login successfull',
-                            id: user[0]._id
+                            id: user[0]._id,
+                            name: user[0].name
                         });
                     }
                 });

@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
+    uId: {
+        type: String
+        // required: true
+    },
     name: {
         type: String,
         required: true
     },
     contact: {
-        type: Number,
-        minlength: 10,
-        maxlength: 10,
+        type: String,
         required: true
     },
     time: {
@@ -24,9 +26,7 @@ const postSchema = new mongoose.Schema({
         required: true
     },
     pincode: {
-        type: Number,
-        minlength: 6,
-        maxlength: 6,
+        type: String,
         required: true
     },
     address: {

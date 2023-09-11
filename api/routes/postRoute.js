@@ -4,6 +4,7 @@ const Post = require('../models/post');
 
 router.post('/add', (req, res) => {
     const post = new Post({
+        uId: req.body.uId,
         name: req.body.name,
         contact: req.body.contact,
         time: req.body.time,
@@ -23,14 +24,17 @@ router.post('/add', (req, res) => {
     post.save()
         .then(result => {
             res.status(200).json({
+                status: 'success',
                 message: 'Post created successfully',
-                // result: result
+                result: result
             });
+
         })
         .catch(err => {
             res.status(500).json({
                 error: err
             });
+            console.log(err);
         });
 });
 
