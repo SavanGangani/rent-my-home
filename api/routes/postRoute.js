@@ -52,6 +52,20 @@ router.get('/allpost', (req, res) => {
         });
 });
 
+router.get('/user/:uId', (req, res) => {
+    Post.find({ uId: req.params.uId })
+        .then(post => {
+            res.status(200).json({
+                post: post
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
 router.get('/post/:housetype', (req, res) => {
     Post.find({ housetype: req.params.housetype })
         .then(post => {
@@ -65,6 +79,46 @@ router.get('/post/:housetype', (req, res) => {
             });
         });
 });
+
+router.get('/area/:area', (req, res) => {
+    Post.find({ area: req.params.area })
+        .then(post => {
+            res.status(200).json({
+                post: post
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+// router.get('/post/', async (req, res) => {
+//     try {
+//         const { city, area, houseType } = req.query;
+//         const filter = {};
+//         if (city) {
+//             filter.city = city;
+//         }
+//         if (area) {
+//             filter.area = area;
+//         }
+//         if (houseType) {
+//             filter.housetype = houseType;
+//         }
+
+//         const data = await Post.find(filter);
+//         res.json(data);
+//     } catch (err) {
+//         res.status(500).json({
+//             error: err
+//         });
+//     }
+// });
+
+
+
 
 router.delete('/delete/:id', (req, res) => {
     Post.deleteOne({ _id: req.params.id })
